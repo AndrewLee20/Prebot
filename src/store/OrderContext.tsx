@@ -11,10 +11,8 @@ const SESSION_ID_KEY = 'prebot_session_id';
 const FINAL_RESET_KEY = 'prebot_final_order_reset_v1';
 
 interface OrderContextValue {
-  currentOrder: Order | null;
   orderHistory: Order[];
   placeOrder: (items: CartLine[], totalPrice: number) => Order;
-  setCurrentOrder: (order: Order | null) => void;
   deleteOrder: (orderId: string) => void;
 }
 
@@ -99,7 +97,6 @@ function nextOrderNumber() {
 
 export function OrderProvider({ children }: { children: ReactNode }) {
   const [orderHistory, setOrderHistory] = useState<Order[]>(() => readOrderHistory());
-  const currentOrder = orderHistory[0] ?? null;
 
   useEffect(() => {
     // 앱 시작 시 한 번 더 날짜 경계를 확인한다.
@@ -129,15 +126,6 @@ export function OrderProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(ORDER_HISTORY_KEY, JSON.stringify(orders));
     if (orders[0]) localStorage.setItem(CURRENT_ORDER_KEY, JSON.stringify(orders[0]));
     else localStorage.removeItem(CURRENT_ORDER_KEY);
-  };
-
-  const setCurrentOrder = (order: Order | null) => {
-    if (!order) {
-      persistHistory([]);
-      return;
-    }
-    const rest = orderHistory.filter((item) => item.id !== order.id);
-    persistHistory([order, ...rest]);
   };
 
   const deleteOrder = (orderId: string) => {
@@ -170,10 +158,8 @@ export function OrderProvider({ children }: { children: ReactNode }) {
   };
 
   const value = useMemo<OrderContextValue>(() => ({
-    currentOrder,
     orderHistory,
     placeOrder,
-    setCurrentOrder,
     deleteOrder,
   }), [orderHistory]);
 

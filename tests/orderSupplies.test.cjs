@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const { buildSync } = require('esbuild');
 
-// 프로젝트의 TypeScript를 기존 esbuild로 실행하므로 추가 패키지가 필요 없다.
+// TypeScript 주문 로직을 esbuild로 묶어 Node 테스트에서 실행한다.
 const bundle = buildSync({
   stdin: {
     contents: `export * from './services/orderService'; export * from './data/menu';`,

@@ -1,8 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppShell } from '../components/layout/AppShell';
-import { BottomNavigation } from '../components/layout/BottomNavigation';
-import { PageHeader } from '../components/layout/PageHeader';
+import { PageContent } from '../components/layout/PageContent';
 import { CategoryTabs } from '../components/menu/CategoryTabs';
 import { MenuGrid } from '../components/menu/MenuGrid';
 import { MenuOptionModal } from '../components/menu/MenuOptionModal';
@@ -31,17 +30,12 @@ export function MenuPage() {
 
   return (
     <AppShell>
-      <div className="prebot-scroll-area bg-prebot-paper">
-        <PageHeader />
-        <div className="px-5 pb-6">
-          <CategoryTabs activeCategory={activeCategory} onChange={setActiveCategory} />
-          <div className="pt-4">
-            <MenuGrid items={visibleItems} onSelect={setSelectedMenu} />
-          </div>
+      <PageContent className="px-5 pb-6">
+        <CategoryTabs activeCategory={activeCategory} onChange={setActiveCategory} />
+        <div className="pt-4">
+          <MenuGrid items={visibleItems} onSelect={setSelectedMenu} />
         </div>
-      </div>
-
-      <BottomNavigation />
+      </PageContent>
 
       <MenuOptionModal item={selectedMenu} onClose={() => setSelectedMenu(null)} onSubmit={handleOptionSubmit} />
       <AddToCartConfirmModal

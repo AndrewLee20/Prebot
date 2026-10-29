@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { MenuItem, MenuSelection, MenuSize, Temperature } from '../../types/menu';
 import { OptionPill } from './OptionPill';
 
@@ -22,10 +22,9 @@ export function MenuOptionModal({ item, onClose, onSubmit }: MenuOptionModalProp
     setQuantity(1);
   }, [item]);
 
-  const supportsTemperature = useMemo(() => item?.category !== 'food', [item]);
-  const supportsSize = useMemo(() => item?.category !== 'food', [item]);
-
   if (!item) return null;
+
+  const isDrink = item.category !== 'food';
 
   const submit = () => {
     const selection: MenuSelection = {
@@ -91,7 +90,7 @@ export function MenuOptionModal({ item, onClose, onSubmit }: MenuOptionModalProp
             </OptionPill>
           </div>
 
-          {supportsTemperature && (
+          {isDrink && (
             <>
               <div className="my-3.5 h-px bg-[#ddd4cb]" />
               <div className="grid grid-cols-2 gap-2.5">
@@ -109,7 +108,7 @@ export function MenuOptionModal({ item, onClose, onSubmit }: MenuOptionModalProp
             </>
           )}
 
-          {supportsSize && (
+          {isDrink && (
             <div className="mt-4">
               <p className="mb-2 text-[16px] font-semibold tracking-[-0.02em]">사이즈</p>
               <div className="grid grid-cols-3 gap-2.5">

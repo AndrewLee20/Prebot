@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/common/Button';
 import { AppShell } from '../components/layout/AppShell';
-import { BottomNavigation } from '../components/layout/BottomNavigation';
 import { PageHeader } from '../components/layout/PageHeader';
 
 export function HomePage() {
@@ -9,7 +8,7 @@ export function HomePage() {
 
   return (
     <AppShell>
-      <section className="absolute inset-x-0 top-0 bottom-[88px] overflow-hidden bg-[#d9c8b7]">
+      <section className="absolute inset-x-0 top-0 bottom-[var(--bottom-nav-height)] overflow-hidden bg-[#d9c8b7]">
         <img
           src="/images/prebot_background.png"
           alt="따뜻한 자연광 아래 놓인 아이스 카페라떼"
@@ -35,7 +34,6 @@ export function HomePage() {
           </Button>
         </div>
       </section>
-      <BottomNavigation />
     </AppShell>
   );
 }
