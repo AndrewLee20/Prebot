@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #241d18;
+  background: #f1ece4;
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --bottom-nav-height: 88px;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(255,255,255,.94), rgba(255,255,255,0) 30%),
+    #eee9e1;
+}
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+
+@layer components {
+  .prebot-shell {
+    @apply relative mx-auto h-dvh w-full overflow-hidden bg-prebot-paper text-prebot-ink md:my-8 md:h-[820px] md:max-w-[430px] md:rounded-[2.25rem] md:shadow-prebot-shell;
+  }
+
+  .prebot-scroll-area {
+    @apply absolute inset-x-0 top-0 overflow-y-auto overscroll-contain;
+    bottom: var(--bottom-nav-height);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(54, 43, 35, .24) transparent;
+  }
+
+  .prebot-scroll-area::-webkit-scrollbar { width: 5px; }
+  .prebot-scroll-area::-webkit-scrollbar-track { background: transparent; }
+  .prebot-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(54, 43, 35, .2);
+    border-radius: 999px;
+  }
+}
